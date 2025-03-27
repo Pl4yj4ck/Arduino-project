@@ -1,1 +1,1 @@
-voglio creare una macchina che si muove in automatico e che parta da un bot telegram
+
