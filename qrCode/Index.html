@@ -2,16 +2,29 @@
 <html lang="it">
 <head>
   <meta charset="UTF-8">
-  <title>Scacchiera Dinamica</title>
+  <title>Generatore di QR code</title>
   <style>
-    body {
-      font-family: sans-serif;
-      background-color: #f0f0f0;
-      height: 100vh;
+    html, body {
       margin: 0;
+      padding: 0;
+      height: 100%;
+      background-color: #eeeeee; /* Grigio chiaro chiaro */
+      font-family: Arial, sans-serif;
+    }
+
+    .full-height {
       display: flex;
-      justify-content: center;
+      flex-direction: column;
+      height: 100vh;
       align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    h1 {
+      margin-bottom: 40px;
+      font-size: 36px;
+      color: #333;
     }
 
     .wrapper {
@@ -24,6 +37,8 @@
       background-color: #ccc;
       border-radius: 20px;
       padding: 20px;
+      overflow: auto;
+      max-height: 80vh;
     }
 
     table {
@@ -47,50 +62,70 @@
 
     .input-area {
       display: flex;
-      flex-direction: column;
-      gap: 10px;
+      align-items: center;
+      gap: 0;
     }
 
     input[type="text"] {
-      padding: 8px;
+      padding: 10px;
       font-size: 16px;
+      border: 1px solid #ccc;
+      border-right: none;
+      border-radius: 10px 0 0 10px;
+      outline: none;
       width: 200px;
     }
 
     button {
-      padding: 8px;
+      width: 50px;
+      height: 50px;
       font-size: 16px;
       background-color: #444;
       color: white;
       border: none;
-      border-radius: 5px;
+      border-radius: 0 10px 10px 0;
       cursor: pointer;
     }
 
     button:hover {
       background-color: #222;
     }
+
+    @media (max-height: 600px) {
+      h1 {
+        font-size: 28px;
+        margin-bottom: 20px;
+      }
+
+      .container {
+        max-height: 60vh;
+      }
+    }
   </style>
 </head>
 <body>
 
-<div class="wrapper">
-  <!-- SCACCHIERA -->
-  <div class="container">
-    <table id="scacchiera"></table>
-  </div>
+<div class="full-height">
+  <h1>Generatore di QR code</h1>
 
-  <!-- CAMPO DI TESTO -->
-  <div class="input-area">
-    <input type="text" id="inputParole" placeholder="Inserisci parole">
-    <button onclick="inviaParole()">Invia</button>
+  <div class="wrapper">
+    <!-- SCACCHIERA -->
+    <div class="container">
+      <table id="scacchiera"></table>
+    </div>
+
+    <!-- CAMPO DI TESTO + BOTTONE -->
+    <div class="input-area">
+      <input type="text" id="inputParole" placeholder="Inserisci parole">
+      <button onclick="inviaParole()">➤</button>
+    </div>
   </div>
 </div>
 
 <script>
   // Array che definisce la scacchiera: 0 = bianca, 1 = nera
   const pattern = [
-    1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 
+  1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 
 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 1, 
 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 1, 
 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 0, 0, 1, 0, 1, 1, 1, 0, 1, 
@@ -143,7 +178,7 @@
   function inviaParole() {
     const parole = document.getElementById("inputParole").value;
     alert("Hai scritto: " + parole);
-    // Qui puoi aggiungere altre azioni da fare con le parole inviate
+    // Aggiungi logica aggiuntiva qui se desideri elaborare le parole
   }
 </script>
 
