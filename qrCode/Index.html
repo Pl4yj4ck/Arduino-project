@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>Scacchiera Dinamica</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background-color: #f0f0f0;
+      height: 100vh;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .wrapper {
+      display: flex;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .container {
+      background-color: #ccc;
+      border-radius: 20px;
+      padding: 20px;
+    }
+
+    table {
+      border-collapse: collapse;
+    }
+
+    td {
+      width: 40px;
+      height: 40px;
+      padding: 0;
+      margin: 0;
+    }
+
+    .white {
+      background-color: white;
+    }
+
+    .black {
+      background-color: black;
+    }
+
+    .input-area {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    input[type="text"] {
+      padding: 8px;
+      font-size: 16px;
+      width: 200px;
+    }
+
+    button {
+      padding: 8px;
+      font-size: 16px;
+      background-color: #444;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #222;
+    }
+  </style>
+</head>
+<body>
+
+<div class="wrapper">
+  <!-- SCACCHIERA -->
+  <div class="container">
+    <table id="scacchiera"></table>
+  </div>
+
+  <!-- CAMPO DI TESTO -->
+  <div class="input-area">
+    <input type="text" id="inputParole" placeholder="Inserisci parole">
+    <button onclick="inviaParole()">Invia</button>
+  </div>
+</div>
+
+<script>
+  // Array che definisce la scacchiera: 0 = bianca, 1 = nera
+  const pattern = [
+    1, 1, 1, 0, 0,0,
+    0,1,1,0,1,1,
+    1, 1, 1, 0, 0,0,
+    0,1,1,0,1,1,
+    1, 1, 1, 0, 0,0,
+    0,1,1,0,1,1
+  ];
+
+  function creaScacchiera(array) {
+    const n = Math.sqrt(array.length);
+    const table = document.getElementById("scacchiera");
+    table.innerHTML = ""; // Pulisce la scacchiera precedente
+
+    if (!Number.isInteger(n)) {
+      table.innerHTML = "<tr><td colspan='100'>Errore: l'array non forma una scacchiera quadrata.</td></tr>";
+      return;
+    }
+
+    let index = 0;
+    for (let i = 0; i < n; i++) {
+      const row = document.createElement("tr");
+      for (let j = 0; j < n; j++) {
+        const cell = document.createElement("td");
+        cell.className = array[index] === 1 ? "black" : "white";
+        row.appendChild(cell);
+        index++;
+      }
+      table.appendChild(row);
+    }
+  }
+
+  // Chiamata iniziale
+  creaScacchiera(pattern);
+
+  // Funzione collegata al bottone
+  function inviaParole() {
+    const parole = document.getElementById("inputParole").value;
+    alert("Hai scritto: " + parole);
+    // Qui puoi aggiungere altre azioni da fare con le parole inviate
+  }
+</script>
+
+</body>
+</html>
